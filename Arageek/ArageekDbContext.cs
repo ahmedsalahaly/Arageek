@@ -1,4 +1,7 @@
 ﻿using Arageek.Models;
+using Arageek.Models.Categories;
+using Arageek.Models.Users;
+using Arageek.Parent;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -16,17 +19,10 @@ namespace Arageek
         {
             optionsBuilder.UseSqlServer(ConnectionString);
         }
-        public DbSet<Art> arts { get; set; }
-        public DbSet<Biography> biographies { get; set; }
-        public DbSet<Education> educations { get; set; }
-        public DbSet<FastNew> fastNews { get; set; }
-        public DbSet<InspirationalCharacter> inspirationalCharacters { get; set; }
-        public DbSet<Latestpost> latestposts { get; set; }
-        public DbSet<MainMenu> mainMenus { get; set; }
-        public DbSet<Promotional> promotionals { get; set; }
-        public DbSet<ReadAlsoAbout> readAlsoAbouts { get; set; }
-        public DbSet<StudyAbroadGuides> studyAbroadGuides { get; set; }
+        public DbSet<Artical> articals { get; set; }
+        public DbSet<Auther> authers { get; set; }
+        public DbSet<MainCategorey> mainCategoreys { get; set; }
         public DbSet<User> users { get; set; }
-        public DbSet<UserRole> UserRoles { get; set; }
+        public DbSet<UserRole> userRoles { get; set; }
     }
 }

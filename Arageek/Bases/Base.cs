@@ -9,7 +9,6 @@ namespace Arageek.Bases
 {
     public class Base
     {
-        [Key]
         public int Id { get; set; }
         public string Name { get; set; }
     }

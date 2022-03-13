@@ -12,6 +12,6 @@ namespace Arageek.Repository
         void Update(T entity);
         void Delete(int Id);
         T Get(int id);
-        List<T> Get();  
+        List<T> Get();
     }
 }

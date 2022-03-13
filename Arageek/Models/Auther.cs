@@ -1,4 +1,4 @@
-﻿using Arageek.Audits;
+﻿using Arageek.Parent;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Arageek.Models
 {
-    public class ReadAlsoAbout : Audit
+    public class Auther:Humen
     {
-        public string Categories { get; set; }
-        public int CharactersId { get; set; }
+        public string Bio { get; set; }
+        public List<Artical> articals { get; set; }
     }
 }
