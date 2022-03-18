@@ -10,48 +10,55 @@ namespace Arageek.Services
 {
     public class AutherService : IAuther
     {
-        ArageekDbContext context = new ArageekDbContext();
+        ArageekDbContext dbContext = new ArageekDbContext();
         public void Add(Auther entity)
         {
+            if (!IsExist(entity))
+            {
             entity.CreatedDate = DateTime.Now;
-            context.authers.Add(entity);
-            context.SaveChanges();
+            dbContext.authers.Add(entity);
+            dbContext.SaveChanges();
+            }
         }
 
         public void Delete(int Id)
         {
-            context.authers.Remove(Get(Id));
-            context.SaveChanges();
+            dbContext.authers.Remove(Get(Id));
+            dbContext.SaveChanges();
         }
 
         public Auther Get(int Id)
         {
-            return context.authers.Find(Id);
+            return dbContext.authers.Find(Id);
         }
 
         public List<Auther> Get()
         {
-            return context.authers.ToList();
+            return dbContext.authers.ToList();
         }
 
         public bool IsExist(Auther Name)
         {
-            return context.authers.Any(x => x.Id == Name.Id);
+            return dbContext.authers.Any(x => x.Id == Name.Id);
         }
 
         public bool IsExistById(int Id)
         {
-            return context.authers.Any(x => x.Id == Id);
+            return dbContext.authers.Any(x => x.Id == Id);
         }
 
         public void Update(Auther entity)
         {
+         
+         if (IsExist(entity))
+         {
             Auther OldAuther = Get(entity.Id);
             OldAuther.FirstName = entity.FirstName;
             OldAuther.LastName = entity.LastName;
             OldAuther.BirthDay = entity.BirthDay;
-            context.authers.Update(OldAuther);
-            context.SaveChanges();
+            dbContext.authers.Update(OldAuther);
+            dbContext.SaveChanges();
+         }
         }
     }
 }

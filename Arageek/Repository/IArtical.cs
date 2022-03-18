@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Arageek.Repository
 {
-    public interface IArtical : IGenericCRUD<Artical>, IValidation<Artical>
+    public interface IArtical : IGenericCRUD<Artical>
     {
        
     }
