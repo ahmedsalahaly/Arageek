@@ -24,5 +24,6 @@ namespace Arageek
         public DbSet<MainCategorey> mainCategoreys { get; set; }
         public DbSet<User> users { get; set; }
         public DbSet<UserRole> userRoles { get; set; }
+        public object User { get; internal set; }
     }
 }
