@@ -15,26 +15,42 @@ namespace Arageek.Services
         {
             if (!IsExist(entity))
             {
-            entity.CreatedDate = DateTime.Now;
-            dbContext.authers.Add(entity);
-            dbContext.SaveChanges();
+                entity.CreatedDate = DateTime.Now;
+                dbContext.authers.Add(entity);
+                dbContext.SaveChanges();
             }
         }
 
         public void Delete(int Id)
         {
-            dbContext.authers.Remove(Get(Id));
-            dbContext.SaveChanges();
+            if (IsExistById(Id))
+            {
+                dbContext.authers.Remove(Get(Id));
+                dbContext.SaveChanges();
+            }
         }
 
         public Auther Get(int Id)
         {
-            return dbContext.authers.Find(Id);
+            if (IsExistById(Id))
+            {
+                return dbContext.authers.Find(Id);
+            }
+            return null;
         }
 
         public List<Auther> Get()
         {
             return dbContext.authers.ToList();
+        }
+
+        public string GetBio(int Id)
+        {
+            if (IsExistById(Id))
+            {
+                return Get(Id).Bio;
+            }
+            return null;
         }
 
         public bool IsExist(Auther Name)
@@ -49,16 +65,16 @@ namespace Arageek.Services
 
         public void Update(Auther entity)
         {
-         
-         if (IsExist(entity))
-         {
-            Auther OldAuther = Get(entity.Id);
-            OldAuther.FirstName = entity.FirstName;
-            OldAuther.LastName = entity.LastName;
-            OldAuther.BirthDay = entity.BirthDay;
-            dbContext.authers.Update(OldAuther);
-            dbContext.SaveChanges();
-         }
+
+            if (IsExist(entity))
+            {
+                Auther OldAuther = Get(entity.Id);
+                OldAuther.FirstName = entity.FirstName;
+                OldAuther.LastName = entity.LastName;
+                OldAuther.BirthDay = entity.BirthDay;
+                dbContext.authers.Update(OldAuther);
+                dbContext.SaveChanges();
+            }
         }
     }
 }

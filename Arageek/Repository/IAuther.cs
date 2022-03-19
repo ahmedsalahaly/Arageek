@@ -9,6 +9,6 @@ namespace Arageek.Repository
 {
     public interface IAuther : IGenericCRUD<Auther>, IValidation<Auther>
     {
-        
+        string GetBio(int Id);
     }
 }

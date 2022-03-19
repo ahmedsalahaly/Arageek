@@ -11,8 +11,6 @@ namespace Arageek.Models.Categories
     {
         public int Id { get; set; }
         string Name { get; set; }
-        public int ArticaleId { get; set; }
-        [ForeignKey("ArticalId")]
-        public Artical artical { get; set; }
+        public List<Artical> articals { get; set; }
     }
 }

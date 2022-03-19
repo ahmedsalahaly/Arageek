@@ -5,7 +5,6 @@ using Arageek.Services;
 
 Console.WriteLine("Hello, World!");
 
-ArageekDbContext dbContext = new ArageekDbContext();
 
 //for (; ; )
 //{

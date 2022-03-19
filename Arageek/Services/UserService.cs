@@ -1,5 +1,6 @@
 ﻿using Arageek.Models;
 using Arageek.Repository;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace Arageek.Services
                 entity.UserName = entity.UserName.ToUpper();
                 entity.Password = entity.Password.ToUpper();
                 entity.CreatedDate = DateTime.Now;
-                dbContext.User.Add(entity);
+                dbContext.users.Add(entity);
                 dbContext.SaveChanges();
             }
         }
@@ -27,7 +28,7 @@ namespace Arageek.Services
         {
             if (IsExist(Id))
             {
-                dbContext.User.Remove(Get(Id));
+                dbContext.users.Remove(Get(Id));
             }
         }
 
@@ -35,24 +36,24 @@ namespace Arageek.Services
         {
             if (IsExist(id))
             {
-                return dbContext.User.Find(id);
+                return dbContext.users.Find(id);
             }
             return null;
         }
 
         public List<User> Get()
         {
-            return dbContext.User.ToList();
+            return dbContext.users.ToList();
         }
 
         public bool IsExist(int Id)
         {
-            return dbContext.User.Any(x => x.Id == Id);
+            return dbContext.users.Any(x => x.Id == Id);
         }
 
         public bool IsExist(string UserName, string Password)
         {
-            return dbContext.User.Any(x => x.UserName == UserName && x.Password == Password);
+            return dbContext.users.Any(x => x.UserName == UserName && x.Password == Password);
         }
 
         public bool IsPasswordMatch(string Password, string ConfirmPassword)
@@ -69,7 +70,7 @@ namespace Arageek.Services
 
         public bool IsUserNameExist(string UserName)
         {
-            return dbContext.User.Any(x => x.UserName == UserName);
+            return dbContext.users.Any(x => x.UserName == UserName);
         }
 
         public bool IsUserValidate(User entity, bool IsUpdate = false)
@@ -104,8 +105,8 @@ namespace Arageek.Services
         {
             if (IsExist(UserName.ToUpper(), Password.ToUpper()))
             {
-                return dbContext.User.Where(x => x.UserName == UserName && x.Password == Password)
-                    .Include(x => x.addresses).Include(x => x.mobiles).Include(x => x.userRole).FirstOrDefault();
+                return dbContext.users.Where(x => x.UserName == UserName && x.Password == Password)
+                    .Include(x => x.userRole).FirstOrDefault();
             }
             return null;
         }
@@ -120,7 +121,7 @@ namespace Arageek.Services
                 NewEntity.FirstName = entity.FirstName;
                 NewEntity.LastName = entity.LastName;
 
-                dbContext.User.Update(NewEntity);
+                dbContext.users.Update(NewEntity);
                 dbContext.SaveChanges();
             }
         }

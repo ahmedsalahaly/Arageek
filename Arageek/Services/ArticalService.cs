@@ -15,9 +15,9 @@ namespace Arageek.Services
         {
             if (!IsExist(artical.Name))
             {
-            artical.CreatedDate = DateTime.Now;
-            dbContext.articals.Add(artical);
-            dbContext.SaveChanges();
+                artical.CreatedDate = DateTime.Now;
+                dbContext.articals.Add(artical);
+                dbContext.SaveChanges();
             }
         }
         public List<Artical> Get()
@@ -26,7 +26,11 @@ namespace Arageek.Services
         }
         public Artical Get(int ArticalId)
         {
-            return dbContext.articals.Find(ArticalId);
+            if (IsExist(ArticalId))
+            {
+                return dbContext.articals.Find(ArticalId);
+            }
+            return null;
         }
         public void Update(Artical artical)
         {
@@ -53,6 +57,11 @@ namespace Arageek.Services
         public bool IsExist(string name)
         {
             return dbContext.articals.Any(x => x.Name == name);
+        }
+
+        public List<Artical> GetByAuther(int ID)
+        {
+            return dbContext.articals.Where(x => x.AutherId == ID).ToList();
         }
     }
 }

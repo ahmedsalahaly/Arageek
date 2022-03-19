@@ -17,7 +17,9 @@ namespace Arageek.Models
         public int AutherId { get; set; }
         [ForeignKey("AutherId")]
         public Auther auther { get; set; }
-        public List<MainCategorey> mainCategoreys { get; set; }
+        public int CategoreyId { get; set; }
+        [ForeignKey("CategoreyId")]
+        public MainCategorey categorey { get; set; }
 
     }
 }
