@@ -119,18 +119,6 @@ namespace Arageek.ConsoleService
                 }
             }
         }
-        private static User LoginForm()
-        {
-            UserService userService = new UserService();
-            User user;
-            Console.WriteLine("Insert your username");
-            string Username = Console.ReadLine();
-            Console.WriteLine("Insert your password");
-            string Password = Console.ReadLine();
-
-            user = userService.LogIn(Username, Password);
-            return user;
-        }
         private static void ViewProfile(User user)
         {
             Console.WriteLine($"first name {user.FirstName}\n" +
