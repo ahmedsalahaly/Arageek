@@ -10,6 +10,6 @@ namespace Arageek.Consts
     {
         public const string ProjectName = "Arageek";
         public const string ProjectDescription = "Arageek to post articles and news";
-        public static string Version = "6.0";
+        public static string ProjectVersion = "6.0";
     }
 }
