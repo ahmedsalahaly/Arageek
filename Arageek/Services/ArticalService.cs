@@ -63,5 +63,10 @@ namespace Arageek.Services
         {
             return dbContext.articals.Where(x => x.AutherId == ID).ToList();
         }
+
+        public List<Artical> GetAll()
+        {
+            return dbContext.articals.ToList();
+        }
     }
 }

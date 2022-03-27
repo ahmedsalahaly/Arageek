@@ -21,23 +21,39 @@ namespace Arageek.ConsoleService
             Console.WriteLine("Are you current user? true or false");
             bool IsCurrent = Convert.ToBoolean(Console.ReadLine());
             User user = new User();
-            
+            if (IsCurrent)
+            {
+                user = LoginForm();
+                if (user.userRole.Name == Admin.AdminRole)
+                {
+                    AdminUserDealing(user);
+                }
+                else
+                {
+                    GeneralUserDealing(user);
+                }
+            }
+            else
+            {
+                user = RegisterUser();
+            }
+
         }
+         
 
         private static void SeedDate()
         {
             UserService userService = new UserService();
-
             User user = new User();
             UserRoleService userRoleService = new UserRoleService();
 
-            UserRole UserAdmin = new UserRole();
-            UserAdmin.Name = Admin.AdminRole;
-            userRoleService.Add(UserAdmin);
+            UserRole AdminRole = new UserRole();
+            AdminRole.Name = Admin.AdminRole;
+            userRoleService.Add(AdminRole);
 
-            UserRole GeneralUser = new UserRole();
-            GeneralUser.Name = "GeneralUser";
-            userRoleService.Add(GeneralUser);
+            UserRole GeneralRole = new UserRole();
+            GeneralRole.Name = "GeneralUser";
+            userRoleService.Add(GeneralRole);
 
             if (!userService.IsExist(Admin.AdminName, Admin.AdminPassword))
             {
@@ -85,6 +101,29 @@ namespace Arageek.ConsoleService
             }
             return user;
         }
+        private static void AdminUserDealing(User user)
+        {
+
+            Console.WriteLine($"Wellcome {user.FullName}!");
+            for (; ; )
+            {
+                Console.WriteLine("Please choose number of action\n-----\n" +
+                    "1.Display all articals\n" +
+                    "2.Close actions");
+                int Action = Convert.ToInt16(Console.ReadLine());
+
+                switch (Action)
+                {
+                    case 1:
+                        GetAllArticals();
+                        break;
+                }
+                if (Action == 2)
+                {
+                    break;
+                }
+            }
+        }
         private static void GeneralUserDealing(User user)
         {
             for (; ; )
@@ -119,6 +158,18 @@ namespace Arageek.ConsoleService
                 }
             }
         }
+        private static User LoginForm()
+        {
+            UserService userService = new UserService();
+            User user;
+            Console.WriteLine("Insert your username");
+            string Username = Console.ReadLine();
+            Console.WriteLine("Insert your password");
+            string Password = Console.ReadLine();
+
+            user = userService.LogIn(Username, Password);
+            return user;
+        }
         private static void ViewProfile(User user)
         {
             Console.WriteLine($"first name {user.FirstName}\n" +
@@ -128,6 +179,27 @@ namespace Arageek.ConsoleService
         private static void UpdateProfile(User user)
         {
             ViewProfile(user);
+        }
+        private static void GetAllArticals()
+        {
+            ArticalService productService = new ArticalService();
+            List<Artical> products = productService.GetAll();
+            Console.WriteLine("All product\n_______________\n");
+            foreach (Artical product in products)
+            {
+                DisplayArtical(product, true);
+            }
+        }
+        private static void DisplayArtical(Artical product, bool IsAdmin = false)
+        {
+            if (IsAdmin)
+            {
+                Console.WriteLine($"id.{product.Id}");
+            }
+            else
+            {
+                Console.WriteLine($"id.{product.Id}");
+            }
         }
     }
 }
