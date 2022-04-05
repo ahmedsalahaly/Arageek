@@ -1,10 +1,12 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using Arageek;
+using Arageek.ConsoleService;
 using Arageek.Models;
 using Arageek.Services;
 
 Console.WriteLine("Hello, World!");
 
+ConsoleService.UserDealing();
 
 //for (; ; )
 //{

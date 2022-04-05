@@ -16,11 +16,18 @@ namespace Arageek.Services
         {
             if (IsUserValidate(entity))
             {
-                entity.UserName = entity.UserName.ToUpper();
-                entity.Password = entity.Password.ToUpper();
-                entity.CreatedDate = DateTime.Now;
-                dbContext.users.Add(entity);
-                dbContext.SaveChanges();
+                try
+                {
+                    entity.UserName = entity.UserName.ToUpper();
+                    entity.Password = entity.Password.ToUpper();
+                    entity.CreatedDate = DateTime.Now;
+                    dbContext.users.Add(entity);
+                    dbContext.SaveChanges(); 
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error is {ex.Message}");
+                }
             }
         }
 

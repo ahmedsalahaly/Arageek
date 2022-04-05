@@ -39,7 +39,7 @@ namespace Arageek.ConsoleService
             }
 
         }
-         
+
 
         private static void SeedDate()
         {
@@ -109,6 +109,11 @@ namespace Arageek.ConsoleService
             {
                 Console.WriteLine("Please choose number of action\n-----\n" +
                     "1.Display all articals\n" +
+                    "2.Add new article\n" +
+                    "3.Desactive Article\n" +
+                    "4.Add main category\n" +
+                    "5.Display all categories\n" +
+                    "6.Desactive category\n" +
                     "2.Close actions");
                 int Action = Convert.ToInt16(Console.ReadLine());
 
@@ -137,7 +142,8 @@ namespace Arageek.ConsoleService
                     Console.WriteLine($"Hello {user.FullName}\n");
                     Console.WriteLine("Please insert number of action\n" +
                         "1.View Profile \n" +
-                       "2.Update profile \n " +
+                        "2.Update profile \n" +
+                        "3.Display articles by category\n" +
                         "3.Close actions");
                     int ActionNumber = Convert.ToInt32(Console.ReadLine());
                     switch (ActionNumber)
