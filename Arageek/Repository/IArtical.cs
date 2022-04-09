@@ -12,5 +12,6 @@ namespace Arageek.Repository
         void Dective(int id);
         List<Artical> GetByAuther(int ID);
         List<Artical> GetAll();
+        List<Artical> GetByCategory(int ID);
     }
 }

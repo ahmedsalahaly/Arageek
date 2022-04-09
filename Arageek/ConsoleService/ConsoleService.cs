@@ -119,6 +119,7 @@ namespace Arageek.ConsoleService
                     "5.Display all categories\n" +
                     "6.Desactive category\n" +
                     "7.Close actions");
+                // add get article by auther + add category 
                 int Action = Convert.ToInt16(Console.ReadLine());
 
                 switch (Action)
@@ -133,11 +134,10 @@ namespace Arageek.ConsoleService
                     case 3:
                         DectiveArtical();
                         break;
-
-                        if (Action == 7)
-                        {
-                            break;
-                        }
+                }
+                if (Action == 7)
+                {
+                    break;
                 }
             }
         }
@@ -212,11 +212,11 @@ namespace Arageek.ConsoleService
         {
             if (IsAdmin)
             {
-                Console.WriteLine($"id.{artical.Id}");
+                Console.WriteLine($"id.{artical.Id}");// title + body + auther name + created date
             }
             else
             {
-
+                //title + body 
             }
         }
         private static void AddArtical()
@@ -229,9 +229,9 @@ namespace Arageek.ConsoleService
         {
             Artical artical = new Artical();
             Console.WriteLine("Isert name of artical");
-            Artical.ArticalName = Console.ReadLine();
+            artical.ArticalName = Console.ReadLine();
             Console.WriteLine("Isert body");
-            Artical.Body = Console.ReadLine();
+            artical.Body = Console.ReadLine();
             return artical;
         }
         private static void DectiveArtical()
