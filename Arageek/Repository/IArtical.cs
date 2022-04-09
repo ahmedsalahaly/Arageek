@@ -9,6 +9,7 @@ namespace Arageek.Repository
 {
     public interface IArtical : IGenericCRUD<Artical>
     {
+        void Dective(int id);
         List<Artical> GetByAuther(int ID);
         List<Artical> GetAll();
     }

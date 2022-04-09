@@ -68,5 +68,16 @@ namespace Arageek.Services
         {
             return dbContext.articals.ToList();
         }
+
+        public void Dective(int id)
+        {
+            if (IsExist(id))
+            {
+                Artical product = Get(id);
+                product.IsDisplay = false;
+                dbContext.articals.Update(product);
+                dbContext.SaveChanges();
+            }
+        }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using Arageek.Consts;
 using Arageek.Models;
+using Arageek.Models.Categories;
 using Arageek.Models.Users;
+using Arageek.Repository;
 using Arageek.Services;
 using System;
 using System.Collections.Generic;
@@ -12,6 +14,8 @@ namespace Arageek.ConsoleService
 {
     public static class ConsoleService
     {
+        private static IEnumerable<Artical> artical;
+
         public static void UserDealing()
         {
             Console.WriteLine($"Welcome {ProjectDetails.ProjectName}\n" +
@@ -73,7 +77,7 @@ namespace Arageek.ConsoleService
             User user = new User();
             for (; ; )
             {
-                Console.WriteLine("please fill register form\n");
+                Console.WriteLine("please full register form\n");
 
                 Console.WriteLine("Insert your first name");
                 user.FirstName = Console.ReadLine();
@@ -95,7 +99,7 @@ namespace Arageek.ConsoleService
                 }
                 else
                 {
-                    Console.WriteLine($"you has been registered successfuly{user.FullName}");
+                    Console.WriteLine($"you has been registered successfuly {user.FullName}");
                     break;
                 }
             }
@@ -114,7 +118,7 @@ namespace Arageek.ConsoleService
                     "4.Add main category\n" +
                     "5.Display all categories\n" +
                     "6.Desactive category\n" +
-                    "2.Close actions");
+                    "7.Close actions");
                 int Action = Convert.ToInt16(Console.ReadLine());
 
                 switch (Action)
@@ -122,10 +126,18 @@ namespace Arageek.ConsoleService
                     case 1:
                         GetAllArticals();
                         break;
-                }
-                if (Action == 2)
-                {
-                    break;
+
+                    case 2:
+                        AddArtical();
+                        break;
+                    case 3:
+                        DectiveArtical();
+                        break;
+
+                        if (Action == 7)
+                        {
+                            break;
+                        }
                 }
             }
         }
@@ -188,24 +200,46 @@ namespace Arageek.ConsoleService
         }
         private static void GetAllArticals()
         {
-            ArticalService productService = new ArticalService();
-            List<Artical> products = productService.GetAll();
-            Console.WriteLine("All product\n_______________\n");
-            foreach (Artical product in products)
+            ArticalService articalService = new ArticalService();
+            List<Artical> products = articalService.GetAll();
+            Console.WriteLine("All artical\n_______________\n");
+            foreach (Artical artical in artical)
             {
-                DisplayArtical(product, true);
+                DisplayArtical(artical, true);
             }
         }
-        private static void DisplayArtical(Artical product, bool IsAdmin = false)
+        private static void DisplayArtical(Artical artical, bool IsAdmin = false)
         {
             if (IsAdmin)
             {
-                Console.WriteLine($"id.{product.Id}");
+                Console.WriteLine($"id.{artical.Id}");
             }
             else
             {
-                Console.WriteLine($"id.{product.Id}");
+
             }
+        }
+        private static void AddArtical()
+        {
+            Artical artical = ArticalForm();
+            ArticalService articalService = new ArticalService();
+            articalService.Add(artical);
+        }
+        private static Artical ArticalForm()
+        {
+            Artical artical = new Artical();
+            Console.WriteLine("Isert name of artical");
+            Artical.ArticalName = Console.ReadLine();
+            Console.WriteLine("Isert body");
+            Artical.Body = Console.ReadLine();
+            return artical;
+        }
+        private static void DectiveArtical()
+        {
+            Console.WriteLine("Insert artical id ");
+            int id = Convert.ToInt16(Console.ReadLine());
+            IArtical articalService = new ArticalService();
+            articalService.Dective(id);
         }
     }
 }

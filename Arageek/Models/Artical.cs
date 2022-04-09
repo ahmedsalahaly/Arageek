@@ -12,8 +12,11 @@ namespace Arageek.Models
 {
     public class Artical:Audit
     {
+        public string ArticalName { get; set; } 
         public string Title { get; set; }
         public string Body { get; set; }
+        public double Price { get; set; }
+        public bool IsDisplay { get; set; }
         public int AutherId { get; set; }
         [ForeignKey("AutherId")]
         public Auther auther { get; set; }
