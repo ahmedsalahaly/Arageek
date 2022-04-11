@@ -9,5 +9,7 @@ namespace Arageek.Repository
 {
     public interface IMainCategory:IGenericCRUD<MainCategorey>,IValidation<MainCategorey>
     {
+        void Dective(int id);
+
     }
 }

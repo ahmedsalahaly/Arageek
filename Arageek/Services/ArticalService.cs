@@ -63,6 +63,10 @@ namespace Arageek.Services
         {
             return dbContext.articals.Where(x => x.AutherId == ID).ToList();
         }
+        public List<Artical> GetByCategory(int ID)
+        {
+            return dbContext.articals.Where(x => x.CategoreyId == ID).ToList();
+        }
 
         public List<Artical> GetAll()
         {
@@ -73,9 +77,9 @@ namespace Arageek.Services
         {
             if (IsExist(id))
             {
-                Artical product = Get(id);
-                product.IsDisplay = false;
-                dbContext.articals.Update(product);
+                Artical artical = Get(id);
+                artical.IsDisplay = false;
+                dbContext.articals.Update(artical);
                 dbContext.SaveChanges();
             }
         }

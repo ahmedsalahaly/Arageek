@@ -11,7 +11,8 @@ namespace Arageek.Models.Categories
     {
 
         public int Id { get; set; }
-        string Name { get; set; }
+        public string Name { get; set; }
+        public bool IsDisplay { get; set; }
         public List<Artical> articals { get; set; }
     }
 }

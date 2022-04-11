@@ -118,7 +118,8 @@ namespace Arageek.ConsoleService
                     "4.Add main category\n" +
                     "5.Display all categories\n" +
                     "6.Desactive category\n" +
-                    "7.Close actions");
+                    "7.get articals by auther\n" +
+                    "8.Close actions");
                 // add get article by auther + add category 
                 int Action = Convert.ToInt16(Console.ReadLine());
 
@@ -127,15 +128,25 @@ namespace Arageek.ConsoleService
                     case 1:
                         GetAllArticals();
                         break;
-
                     case 2:
                         AddArtical();
                         break;
                     case 3:
                         DectiveArtical();
                         break;
+                    case 4:
+                        AddMainCategorey();
+                        break;
+                    case 5:
+                        GetAllMainCategoryes();
+                        break;
+                    case 6:
+                        DectiveMainCategorey();
+                        break;
+                    case 7:
+                        break;
                 }
-                if (Action == 7)
+                if (Action == 8)
                 {
                     break;
                 }
@@ -156,7 +167,7 @@ namespace Arageek.ConsoleService
                         "1.View Profile \n" +
                         "2.Update profile \n" +
                         "3.Display articles by category\n" +
-                        "3.Close actions");
+                        "4.Close actions");
                     int ActionNumber = Convert.ToInt32(Console.ReadLine());
                     switch (ActionNumber)
                     {
@@ -168,8 +179,11 @@ namespace Arageek.ConsoleService
                             break;
                         default:
                             break;
+                        case 3:
+                            GetAllMainCategoryes();
+                            break;
                     }
-                    if (ActionNumber == 3)
+                    if (ActionNumber == 4)
                     {
                         break;
                     }
@@ -201,7 +215,7 @@ namespace Arageek.ConsoleService
         private static void GetAllArticals()
         {
             ArticalService articalService = new ArticalService();
-            List<Artical> products = articalService.GetAll();
+            List<Artical> articals = articalService.GetAll();
             Console.WriteLine("All artical\n_______________\n");
             foreach (Artical artical in artical)
             {
@@ -212,11 +226,17 @@ namespace Arageek.ConsoleService
         {
             if (IsAdmin)
             {
-                Console.WriteLine($"id.{artical.Id}");// title + body + auther name + created date
+                Console.WriteLine($"id is.{artical.Id}");// title + body + auther id + created date
+                Console.WriteLine($"artical name is.{artical.Name}" );
+                Console.WriteLine($"body is.{artical.Body}");
+                Console.WriteLine($"auther id is.{artical.AutherId}");
+                Console.WriteLine($"created date is.{artical.CreatedDate}");
             }
             else
             {
                 //title + body 
+                Console.WriteLine($"artical name is.{artical.Name}");
+                Console.WriteLine($"body is.{artical.Body}");
             }
         }
         private static void AddArtical()
@@ -240,6 +260,49 @@ namespace Arageek.ConsoleService
             int id = Convert.ToInt16(Console.ReadLine());
             IArtical articalService = new ArticalService();
             articalService.Dective(id);
+        }
+        private static void AddMainCategorey()
+        {
+            MainCategorey mainCategorey = MainCategoreyForm();
+            MainCategoreyService articalService = new MainCategoreyService();
+            articalService.Add(mainCategorey);
+        }
+        private static MainCategorey MainCategoreyForm()
+        {
+            MainCategorey mainCategorey = new MainCategorey();
+            Console.WriteLine("Isert name of main categorey");
+            mainCategorey.Name = Console.ReadLine();
+            return mainCategorey;
+
+        }
+        private static void GetAllMainCategoryes()
+        {
+            MainCategoreyService mainCategoreyService = new MainCategoreyService();
+            List<MainCategorey> mainCategoreys = mainCategoreyService.Get();
+            Console.WriteLine("All main category\n_______________\n");
+            foreach (MainCategorey mainCategorey in mainCategoreys)
+            {
+                DisplayMainCategorey(mainCategorey, true);
+            }
+        }
+        private static void DisplayMainCategorey(MainCategorey mainCategorey, bool IsAdmin = false)
+        {
+            if (IsAdmin)
+            {
+                Console.WriteLine($"id is.{mainCategorey.Id}");
+                Console.WriteLine($"artical name is.{mainCategorey.Name}");
+            }
+            else
+            {
+           
+            }
+        }
+        private static void DectiveMainCategorey()
+        {
+            Console.WriteLine("Insert main categorey id ");
+            int id = Convert.ToInt16(Console.ReadLine());
+            IMainCategory MainCategoreyService = new MainCategoreyService();
+            MainCategoreyService.Dective(id);
         }
     }
 }
